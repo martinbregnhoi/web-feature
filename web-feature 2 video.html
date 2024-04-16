@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Css Grid</title>
+    <style>
+     * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+
+        .item {
+border: 1px solid #333;
+height: auto;
+width: 100vw;
+text-align: center;
+color:#fff;
+display: flex;
+flex-direction: column;
+align-items: center;
+font-size:4rem;
+        }
+        .item:not(:first-of-type){
+          opacity: 0.4; 
+          transition: opacity 2s;     
+        }
+
+        p{
+                width:90vw;
+                max-width: 800px;
+                padding: 4rem 0; 
+        }
+
+        .item-a {
+background: hsl(60, 60%, 61%);
+background-image:url("img-1.jpg");
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+        }
+
+        .item-b {
+background: hsl(60, 60%, 50%);
+background-image:url("img-2.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: right;
+background-attachment: fixed;
+
+        }
+
+        .item-c {
+background: hsl(60, 60%, 40%);
+background-image: url("img-3.jpg");
+background-size: cover;
+background-repeat: no-repeat;
+background-position: center;
+background-attachment: fixed;
+        }
+
+        .item-d {
+background: hsl(60, 60%, 30%);
+ display:grid;
+           justify-items: center;
+           align-items: start;
+           position:relative;
+
+        }
+   /* video background */
+       #background-video {
+           grid-area: 1 /1;
+           height: 100vh;
+           width: 100%;
+           object-fit: cover;
+       }
+       /* video overlay */
+       #video-tekst{
+           grid-area: 1 / 1;
+           opacity: .8; 
+           place-self:center;
+       } 
+
+       .item.fade-in{
+                /* animation: fadeIn 5s; */
+                opacity: 1;
+        }
+@keyframes fadeIn{
+        0% {opacity: 0.4;}
+        100% { opacity: 1;}
+}
+
+        @media screen and (min-width:768px) {
+
+
+        }
+
+    </style>
+
+</head>
+<body>
+   <main class="container">
+       <div class="item item-a">
+<p>Bacon ipsum dolor amet porchetta fatback tail, leberkas jerky hamburger pork belly.</p><p>Chuck t-bone drumstick boudin cow jerky kielbasa frankfurter pig salami sausage ham.</p>  <p>Short ribs ground round beef swine tri-tip cupim shank picanha biltong bresaola shoulder fatback tail pork loin. Kielbasa prosciutto cupim sirloin pancetta.</p><p> Pork chop beef ribs frankfurter chicken spare ribs, drumstick biltong short loin porchetta pastrami tri-tip flank.</p></div>
+       <div class="item item-b"><p>Bacon ipsum dolor amet porchetta fatback tail, leberkas jerky hamburger pork belly.</p>
+<p>Chuck t-bone drumstick boudin cow jerky kielbasa frankfurter pig salami sausage ham.</p>
+<p>Short ribs ground round beef swine tri-tip cupim shank picanha biltong bresaola shoulder fatback tail pork loin.
+        Kielbasa prosciutto cupim sirloin pancetta.</p></div>
+        <div class="item item-d">
+                <video id="background-video" autoplay loop muted poster="https://assets.codepen.io/6093409/river.jpg">
+                        <source src="https://assets.codepen.io/6093409/river.mp4" type="video/mp4">
+                </video>
+                <div id="video-tekst">
+                        </section>
+                        <p>Bacon ipsum dolor amet porchetta fatback tail, leberkas jerky hamburger pork belly.</p>
+                        <p>Chuck t-bone drumstick boudin cow jerky kielbasa frankfurter pig salami sausage ham.</p>
+                </div>
+        </div>
+       <div class="item item-c"><p>Bacon ipsum dolor amet porchetta fatback tail, leberkas jerky hamburger pork belly.</p>
+<p>Chuck t-bone drumstick boudin cow jerky kielbasa frankfurter pig salami sausage ham.</p>
+<p>Short ribs ground round beef swine tri-tip cupim shank picanha biltong bresaola shoulder fatback tail pork loin.
+        Kielbasa prosciutto cupim sirloin pancetta.</p></div>
+      
+   </main>
+<script>
+    const boxes = document.querySelectorAll('.item') ;
+    window.addEventListener('scroll', fadeBoxes);
+    
+    function fadeBoxes(){
+        const triggerBottom = (window.innerHeight - 200);
+            
+        boxes.forEach(box => {
+                const boxHeight = box.getBoundingClientRect().height;
+                const boxTop = box.getBoundingClientRect().top;
+                const boxBottom = box.getBoundingClientRect().bottom;
+
+                if (boxTop < triggerBottom && boxTop > -boxHeight + 150){
+                        
+                        box.classList.add('fade-in');
+                }
+                if (boxBottom < 100 || boxTop > triggerBottom) {
+                       box.classList.remove('fade-in');
+                       box.style.opcity = 0.4;
+                
+        }
+    });
+};
+</script>
+</body>
+</html>
