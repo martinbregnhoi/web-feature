@@ -30,6 +30,8 @@ align-items: center;
                 width:90vw;
                 max-width: 800px;
                 margin: 4rem 0; 
+                transform: translateY(50px);
+                transition: transform 1s;
         }
 
         .item-a {
@@ -69,6 +71,9 @@ background: hsl(60, 60%, 30%)
        .item.fade-in{
                 opacity: 1;
         }
+        p.transform{
+                transform: translateY(0);
+        }
 
         @media screen and (min-width:768px) {
 
@@ -98,10 +103,11 @@ background: hsl(60, 60%, 30%)
    
 <script>
     const boxes = document.querySelectorAll('.item') ;
+    const paragraphs = document.querySelectorAll('p');
     window.addEventListener('scroll', fadeBoxes);
     
     function fadeBoxes(){
-    console.log("helllo");
+    console.log(paragraphs);
         const triggerBottom = (window.innerHeight - 200);
             
         boxes.forEach(box => {
@@ -113,6 +119,7 @@ background: hsl(60, 60%, 30%)
                 if (boxTop < triggerBottom && boxTop > -boxHeight + 100){
                         
                         box.classList.add('fade-in');
+
                 }
                 if (boxBottom < 100 || boxTop > triggerBottom) {
                        box.classList.remove('fade-in');
@@ -120,6 +127,22 @@ background: hsl(60, 60%, 30%)
                 
         }
     });
+    paragraphs.forEach( paragraph => {
+        const pHeight = paragraph.getBoundingClientRect().height;
+            const pTop = paragraph.getBoundingClientRect().top;
+            const pBottom = paragraph.getBoundingClientRect().bottom;
+
+            if (pTop < triggerBottom && pTop > -pHeight + 100) {
+
+                    paragraph.classList.add('transform');
+
+            }
+            if (pBottom < 100 || pTop > triggerBottom) {
+                    paragraph.classList.remove('transform');
+                    paragraph.style.translateY = 50;
+
+            }
+    })
 };
 </script>
 </body>
