@@ -19,10 +19,16 @@ display: flex;
 flex-direction: column;
 align-items: center;
         }
+        /* fade ind på alle andre bokse end den første */
         .item:not(:first-of-type){
           opacity: 0.4;  
             transition: opacity 2s; 
           
+        }
+
+        /* klasse der ændre opacity på scroll  */
+       .item.fade-in{
+                opacity: 1;
         }
 
         p{
@@ -66,9 +72,6 @@ background-attachment: fixed;
 background: hsl(60, 60%, 30%)
         }
 
-       .item.fade-in{
-                opacity: 1;
-        }
 
         @media screen and (min-width:768px) {
 
@@ -97,23 +100,27 @@ background: hsl(60, 60%, 30%)
    </main>
    
 <script>
+        //find alle divs.item
     const boxes = document.querySelectorAll('.item') ;
+    //start funktion ved scroll
     window.addEventListener('scroll', fadeBoxes);
-    
+    //funktion til scroll
     function fadeBoxes(){
     console.log("helllo");
+    //hvor i viewporten skal animationen starte
         const triggerBottom = (window.innerHeight - 200);
             
         boxes.forEach(box => {
-        //find positions and height
+        //find positions, top, bottom samt height
                 const boxHeight = box.getBoundingClientRect().height;
                 const boxTop = box.getBoundingClientRect().top;
                 const boxBottom = box.getBoundingClientRect().bottom;
-
+// hvis boksen er indenfor feltes skal animationen starte
                 if (boxTop < triggerBottom && boxTop > -boxHeight + 100){
                         
                         box.classList.add('fade-in');
                 }
+                //når boksen ryger ud af feltet skal den gå tilbage til udgangspunktet
                 if (boxBottom < 100 || boxTop > triggerBottom) {
                        box.classList.remove('fade-in');
                        box.style.opcity = 0.4;

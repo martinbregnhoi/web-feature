@@ -61,6 +61,7 @@ background-attachment: fixed;
 
         .item-d {
 background: hsl(60, 60%, 30%);
+/* display grid, så tekst kan blive placeret oven på video */
  display:grid;
            justify-items: center;
            align-items: start;
@@ -84,10 +85,7 @@ background: hsl(60, 60%, 30%);
        .item.fade-in{
                 opacity: 1;
         }
-/* @keyframes fadeIn{
-        0% {opacity: 0.4;}
-        100% { opacity: 1;}
-} */
+
 
         @media screen and (min-width:768px) {
   p{font-size:4rem;}
@@ -126,7 +124,7 @@ background: hsl(60, 60%, 30%);
     window.addEventListener('scroll', fadeBoxes);
     
     function fadeBoxes(){
-        const triggerBottom = (window.innerHeight - 200);
+        const triggerBottom = (window.innerHeight - 100);
             
         boxes.forEach(box => {
                 const boxHeight = box.getBoundingClientRect().height;
