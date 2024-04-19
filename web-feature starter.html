@@ -6,40 +6,76 @@
     <style>
      * {
            
+margin:0;
+box-sizing: border-box;
            
         }
 
 
         .item {
                 border: 1px solid #666;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+ background-attachment: fixed;
 
+ opacity: 0.4;
+ transition: opacity 2s;
+
+        }
+
+        .fade-in{
+opacity: 1;
         }
         
         p{
-               
+             font-size: 3rem;  
+             width:90vw;
+             max-width: 800px;
+             margin: 4rem 0;
+             color: #fff;
         }
 
         .item-a {
-
-
+                background-image: url("img-1.jpg");
+             /*    background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+                background-attachment: fixed; */
+                opacity: 1;
         }
 
         .item-b {
 
+ background-image: url("img-3.jpg");
+/* background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+ background-attachment: fixed; */
 
         }
 
         .item-c {
+                 background-image: url("img-2.jpg");
+         /*         background-repeat: no-repeat;
+                background-size: cover;
+                background-position: center;
+ background-attachment: fixed; */
+
 
         }
 
         .item-d {
 
-
+background-color: #ca1;
         }
 
         @media screen and (min-width:768px) {
-
+        }
 
     </style>
 
@@ -61,6 +97,35 @@
 <p>Short ribs ground round beef swine tri-tip cupim shank picanha biltong bresaola shoulder fatback tail pork loin.
         Kielbasa prosciutto cupim sirloin pancetta.</p></div>
    </main>
+<script>
+//find bokse
+const boxes = document.querySelectorAll(".item");
 
+//start funktion ved scroll
+window.addEventListener('scroll', fadeboxes);
+//funktion til scroll
+function fadeboxes(){
+       // console.log("virker stadig", boxes);
+       const triggerBottom = window.innerHeight - 200;
+       
+       //find de enkelte boxes
+       boxes.forEach(box => {
+const boxTop = box.getBoundingClientRect().top;
+const boxBottom = box.getBoundingClientRect().bottom;
+const boxHeight = box.getBoundingClientRect().height;
+               console.log({ box,boxTop });
+               //hvis toppen af boksen kommer op forbi bunden af vinduet
+
+               if (boxTop < triggerBottom && boxTop > -boxHeight +100){
+                //tilføj klasse til fade in
+                box.classList.add('fade-in');
+               }
+               if(boxBottom < 100 || boxTop > triggerBottom){
+                box.classList.remove("fade-in");
+                //box.style.opacity = 0.4;
+               }
+       });
+}
+</script>
 </body>
 </html>
